@@ -7,6 +7,8 @@ class CategoryController {
         try {
             const category = await getRepository(CategoryEntity).find();
 
+            console.log(category);
+
             if (category) {
                 return res.status(200).send({ category: category });
             } else {

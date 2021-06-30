@@ -7,6 +7,7 @@ import * as path from "path";
 import userRouter from "./routers/user.router";
 import loginRouter from "./routers/login.router";
 import category from "./routers/category.router";
+import locationRouter from "./routers/location.router";
 
 class App {
     public express: express.Application;
@@ -31,6 +32,7 @@ class App {
             express.static(path.join(__dirname, "..", "uploads"))
         );
         this.express.use("/category", category);
+        this.express.use("/findUsersLocation", locationRouter);
     }
 }
 

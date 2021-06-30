@@ -13,7 +13,29 @@ class UsuarioController {
 
     public async create(req: Request, res: Response) {
         try {
-            let user = req.body;
+            const {
+                id,
+                fullName,
+                cpf,
+                email,
+                phone,
+                password,
+                dataReset,
+                resetToken
+            } = req.body;
+
+
+            let user = {
+                id,
+                fullName,
+                cpf,
+                email,
+                phone,
+                password,
+                resetToken,
+                dataReset
+            }
+
 
             // Valida se o CPF já esta em Utilização
             const cpfExists = await getRepository(UserEntity).findOne({
@@ -40,8 +62,9 @@ class UsuarioController {
             user.resetToken = "";
             user.dataReset = new Date();
 
+
             // Salva Usuario
-            await getRepository(UserEntity).save(user);
+            user = await getRepository(UserEntity).save(user);
 
             const dataImage = {
                 user: user.id,
@@ -55,7 +78,9 @@ class UsuarioController {
             const url = `http://${process.env.IP}/uploads/${dataImage.path}`;
 
             return res.status(202).send({ user, token, url });
+
         } catch (error) {
+            console.log(error);
             res.status(500).send(error);
         }
     }
@@ -99,19 +124,7 @@ class UsuarioController {
                 return;
             }
 
-            //Carrega pontuação do usuário
-            // const balanceData = await getRepository(UserBalanceEntity)
-            //     .createQueryBuilder()
-            //     .where("userid = :userid")
-            //     .setParameters({ userid: id })
-            //     .getMany(); * /
-
-            let balance = [];
-            // if (balanceData) {
-            //     balance = balanceData;
-            // }
-
-            res.send({ user, balance });
+            res.send({ user });
         } catch (error) {
             res.status(500).send(error);
         }

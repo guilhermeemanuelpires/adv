@@ -24,5 +24,6 @@ export class LocateUserEntity {
     longitude: Number;
 
     @ManyToOne(type => UserEntity, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "user_id" })
     user: UserEntity;
 }

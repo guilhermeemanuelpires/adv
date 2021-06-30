@@ -4,6 +4,7 @@ import {
     PrimaryGeneratedColumn,
     OneToMany,
     JoinColumn,
+    JoinTable,
 } from "typeorm";
 
 import Image from "./imageUser.entity";
@@ -40,14 +41,14 @@ export class UserEntity {
     @OneToMany(() => Image, (image) => image.user, {
         cascade: ["insert", "update"],
     })
-
-    @OneToMany(type => CategoryUserEntity, category => category.user, { onDelete: "CASCADE" })
-    category: CategoryUserEntity[];
-
-    @OneToMany(type => LocateUserEntity, location => location.user, { onDelete: "CASCADE" })
-    location: CategoryUserEntity[];
-
     @JoinColumn({ name: "user_id" })
     images: Image[];
 
+    @OneToMany(type => CategoryUserEntity, category => category.user, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "user_id" })
+    category: CategoryUserEntity[];
+
+    @OneToMany(type => LocateUserEntity, location => location.user, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "user_id" })
+    locations: LocateUserEntity[];
 }
