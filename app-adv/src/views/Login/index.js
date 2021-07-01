@@ -168,6 +168,7 @@ export const Login = () => {
                         onSubmitEditing={() => {
                             next.focus();
                         }}
+                        blurOnSubmit={false}
                     />
                     {errorUser && <TextError>{message.user}</TextError>}
                     <Input

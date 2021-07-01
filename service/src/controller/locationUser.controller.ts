@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import { LocateUserEntity } from "../entity/locationUser.entity";
 import { UserEntity } from "../entity/user.entity";
 
 class LocationUserController {

@@ -248,6 +248,7 @@ export const Register = () => {
                                 nextCpf.focus();
                                 setFocus([]);
                             }}
+                            blurOnSubmit={false}
                         />
                         {error.name && <TextError>{message.name}</TextError>}
                         <Input
@@ -273,6 +274,7 @@ export const Register = () => {
                                 nextEmail.focus();
                                 setFocus([]);
                             }}
+                            blurOnSubmit={false}
                         />
                         {error.cpf && <TextError>{message.cpf}</TextError>}
                         <Input
@@ -295,6 +297,7 @@ export const Register = () => {
                                 setFocus([]);
                             }}
                             onChangeText={(text) => setEmail(text)}
+                            blurOnSubmit={false}
                         />
                         {error.email && <TextError>{message.email}</TextError>}
                         <Input
@@ -320,6 +323,7 @@ export const Register = () => {
                             onChangeText={(text) => {
                                 setPhone(foneMask(text));
                             }}
+                            blurOnSubmit={false}
                         />
                         {error.phone && <TextError>{message.phone}</TextError>}
                         <Input
@@ -343,6 +347,7 @@ export const Register = () => {
                                 setFocus([]);
                             }}
                             onChangeText={(text) => setPassword(text)}
+                            blurOnSubmit={false}
                         />
                         {error.password && <TextError>{message.password}</TextError>}
                         <Input

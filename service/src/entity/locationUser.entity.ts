@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 
 import { UserEntity } from "./user.entity";
+import { CityEntity } from "./city.entity";
 
 @Entity("location_user")
 export class LocateUserEntity {
@@ -17,6 +18,12 @@ export class LocateUserEntity {
     @Column()
     description: string;
 
+    @Column()
+    publicPlace: string;
+
+    @Column()
+    street: string;
+
     @Column({ type: "double" })
     latitude: Number;
 
@@ -26,4 +33,8 @@ export class LocateUserEntity {
     @ManyToOne(type => UserEntity, { onDelete: "CASCADE" })
     @JoinColumn({ name: "user_id" })
     user: UserEntity;
+
+    @ManyToOne(type => CityEntity, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "city_id" })
+    city: CityEntity;
 }
