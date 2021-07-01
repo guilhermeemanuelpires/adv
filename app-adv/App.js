@@ -1,24 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import MainStack from "./src/routers/MainStack";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Seja Bem-Vindo ao ADV App, ainda estamos em fase de desenvolvimento, logo mais você será notificado com novas atualizações e novidades...</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar style="light" />
+      <MainStack />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    textAlign: 'center',
-  }
-});
