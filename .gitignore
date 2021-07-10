@@ -1,4 +1,5 @@
 docs/*
+bkp/*
 app/node_modules
 service/node_modules
 service/.env

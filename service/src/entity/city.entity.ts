@@ -20,7 +20,7 @@ export class CityEntity {
 
     @ManyToOne(type => StateEntity, { onDelete: "CASCADE" })
     @JoinColumn({ name: "state_id" })
-    state: StateEntity[];
+    state: StateEntity;
 
     @OneToMany(type => LocateUserEntity, location => location.user, { onDelete: "CASCADE" })
     @JoinColumn({ name: "city_id" })

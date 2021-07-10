@@ -19,10 +19,13 @@ export class LocateUserEntity {
     description: string;
 
     @Column()
+    street: string;
+
+    @Column()
     publicPlace: string;
 
     @Column()
-    street: string;
+    number: string;
 
     @Column({ type: "double" })
     latitude: Number;
