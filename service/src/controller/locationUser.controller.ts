@@ -72,7 +72,7 @@ class LocationUserController {
 
             await getRepository(LocateUserEntity).save(endereco);
 
-            res.status(500).send(endereco);
+            res.status(200).send(endereco);
 
         } catch (error) {
             console.log(error);
