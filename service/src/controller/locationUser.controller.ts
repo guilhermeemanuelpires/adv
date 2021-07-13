@@ -93,7 +93,13 @@ class LocationUserController {
 
     public async citys(req: Request, res: Response) {
         try {
-            const citys = await getRepository(CityEntity).find();
+            const id = req.params.id;
+
+            const citys = await getRepository(CityEntity)
+                .createQueryBuilder()
+                .where("state_id = :id", { id: id })
+                .getMany();
+
             res.status(200).send(citys);
         } catch (error) {
             console.log(error);
