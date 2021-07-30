@@ -1,40 +1,50 @@
+import React from "react";
 import styled from "styled-components/native";
 import { StyleSheet } from "react-native";
 
 export const Container = styled.SafeAreaView`
   background-color: #f0f3f8;
   flex: 1;
+  height: 100%;
 `;
 
-export const ContainerImage = styled.View`
+export const ContainerHeader = styled.View`
+  width: 100%;
+  top: 12%;
+  flex-direction: row;
   align-items: center;
-`;
-
-export const ViewImage = styled.Image`
-  width: 25%;
+  justify-content: space-between;
 `;
 
 export const ContainerTitle = styled.View`
-  top: 2%;
+  width: 85%;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+`;
+
+export const BackButton = styled.TouchableOpacity`
+  margin-left: 5%;
+  width: 15%;
+  height: 30px;
 `;
 
 export const Title = styled.Text`
   font-family: "AveriaSansLibre_400Regular";
-  font-size: 35px;
+  font-size: 25px;
 `;
 
 export const Scroller = styled.ScrollView`
+  margin-top: 14%;
   height: 100%;
 `;
 
 export const Form = styled.SafeAreaView`
-  margin-top: 15%;
-  flex: 1;
+  top: 2%;
+  height: 100%;
   align-items: center;
   justify-content: center;
 `;
-
 export const Input = styled.TextInput`
   margin-top: 2%;
   width: 85%;
@@ -51,11 +61,14 @@ export const Input = styled.TextInput`
 export const TextError = styled.Text`
   margin-top: 2%;
   font-family: "RobotoRegular";
-  font-size: 16px;
+  font-size: 15px;
   color: #fd5555;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
 `;
 
-export const BtnLogin = styled.TouchableOpacity`
+export const BtnRegister = styled.TouchableOpacity`
   margin-top: 5%;
   margin-bottom: 5%;
   width: 85%;
@@ -67,14 +80,28 @@ export const BtnLogin = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+export const FakeDropdown = styled.View`
+  margin-top: 2%;
+  width: 85%;
+  height: 60px;
+  background: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 100px;
+  font-family: "RobotoRegular";
+  color: rgba(0, 0, 0, 0.4);
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: center;
+`;
+
 // !Style para fazer shadow do button
 export const Styles = StyleSheet.create({
   ButtonStyle: {
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 10,
+    elevation: 5,
     zIndex: 1,
   },
   InputError: {
@@ -84,18 +111,18 @@ export const Styles = StyleSheet.create({
   InputFocus: {
     borderColor: "rgba(45, 142, 255, 0.7)",
   },
-  InputSuccess: {
-    borderColor: "rgba(0, 197, 102, 0.5)",
-  },
-  Title: {
-    top: "2%",
-    alignItems: "center",
-  },
-  btnActive: {
-    backgroundColor: "#2d8eff",
-  },
-  btnInactive: {
-    backgroundColor: "rgba(45, 142, 255, 0.7)",
+
+  Dropdown: {
+    marginTop: "2%",
+    width: "85%",
+    height: 60,
+    backgroundColor: "#fafafa",
+    borderColor: "solid rgba(0, 0, 0, 0.13)",
+    borderWidth: 1,
+    borderRadius: 100,
+    fontFamily: "RobotoRegular",
+    paddingLeft: 10,
+    justifyContent: "center",
   },
 });
 
@@ -103,41 +130,4 @@ export const BtnText = styled.Text`
   font-family: "RobotoBold";
   font-size: 16px;
   color: #fff;
-`;
-
-export const ContainerRecoverPassword = styled.View`
-  padding-top: 2%;
-`;
-
-export const BtnRecoverPassword = styled.TouchableOpacity``;
-
-export const RecoverPasswordText = styled.Text`
-  font-family: "RobotoBold";
-  font-size: 14px;
-  color: #020c37;
-  opacity: 0.3;
-`;
-
-export const ContainerRegister = styled.View`
-  margin-top: 10%;
-`;
-
-export const RegisterContent = styled.View`
-  flex-direction: row;
-`;
-
-export const RegisterLabel = styled.Text`
-  margin-right: 5%;
-  font-family: "RobotoBold";
-  font-size: 14px;
-  color: #020c37;
-  opacity: 0.3;
-`;
-
-export const BtnRegister = styled.TouchableOpacity``;
-
-export const BtnRegisterText = styled.Text`
-  font-family: "RobotoRegular";
-  font-size: 16px;
-  color: #2d8eff;
 `;

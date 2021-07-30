@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import MainStack from "./src/routers/MainStack";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
+import Loading from "./src/components/Loading";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -20,21 +21,16 @@ export default function App() {
   if (!fontsLoaded) {
     style = {
       flex: 1,
+      width: "100%",
       backgroundColor: "#4D4845",
       justifyContent: "center",
       alignItems: "center",
     };
-
-    return (
-      <View style={style}>
-        <Text>Carregando...</Text>
-      </View>
-    );
+    return <Loading width={200} height={200} style={style} />;
   }
-
   return (
     <NavigationContainer>
-      <StatusBar style="light" />
+      <StatusBar style="auto" />
       <MainStack />
     </NavigationContainer>
   );

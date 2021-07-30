@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
     KeyboardAvoidingView,
     Keyboard,
-    AsyncStorage,
     ActivityIndicator,
     Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
     Container,
@@ -179,11 +179,11 @@ export const Register = () => {
                                 name: res.user.fullName,
                                 url: res.url,
                             };
-                            // await AsyncStorage.setItem("token", res.token);
-                            // await AsyncStorage.setItem("user", JSON.stringify(data));
+                            await AsyncStorage.setItem("token", res.token);
+                            await AsyncStorage.setItem("user", JSON.stringify(data));
 
                             navigation.reset({
-                                routes: [{ name: "MainTab" }],
+                                routes: [{ name: "Profile" }],
                             });
                         }
                         if (response.status === 406) {

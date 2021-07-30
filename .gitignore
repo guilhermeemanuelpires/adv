@@ -3,4 +3,5 @@ bkp/*
 app/node_modules
 service/node_modules
 service/.env
+/service/uploads
 .expo/*

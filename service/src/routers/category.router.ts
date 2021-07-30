@@ -11,6 +11,8 @@ class Routes {
 
     private init() {
         this.router.get("/", CategoryController.findAll);
+        this.router.post("/:id([0-9]+)", CategoryController.create);
+        this.router.get("/:id([0-9]+)", CategoryController.findById);
     }
 }
 

@@ -11,7 +11,7 @@ export const HeaderArea = styled.View`
   margin-top: 10%;
   height: 15%;
   width: 100%;
-  background: #4d4845;
+  background: #2d8eff;
   justify-content: space-between;
   align-items: center;
 `;
@@ -55,7 +55,7 @@ export const Options = styled.View`
 `;
 
 export const OptionsBoby = styled.TouchableOpacity`
-  background-color: #fd5555;
+  background-color: #2d8eff;
   margin-top: 20px;
   height: 30px;
   border-radius: 10px;
@@ -105,16 +105,24 @@ export const CalloutContainer = styled.View`
 `;
 
 export const CalloutImageContainer = styled.Text`
-  padding-bottom: 40px;
+  padding-bottom: 10px;
 `;
 
-export const CalloutImage = styled.Image``;
+export const CalloutImage = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
 
 export const CalloutContainerText = styled.View``;
 
 export const CalloutText = styled.Text`
   color: #333333;
   font-size: 18px;
+`;
+
+export const CalloutTextDesc = styled.Text`
+  color: #333333;
+  font-size: 12px;
 `;
 
 export const CalloutContainerTextKM = styled.View`

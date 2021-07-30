@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components/native";
 import { StyleSheet } from "react-native";
 
@@ -18,7 +17,7 @@ export const Title = styled.Text`
 `;
 
 export const ContainerCardMain = styled.View`
-  top: 20%;
+  top: 15%;
   align-items: center;
   flex: 1;
 `;
@@ -26,8 +25,8 @@ export const ContainerCardMain = styled.View`
 export const ContentCardMain = styled.View`
   background: #2d8eff;
   border-radius: 20px;
-  width: 90%;
-  height: 65%;
+  width: 85%;
+  height: 50%;
   align-items: center;
 `;
 
@@ -61,9 +60,10 @@ export const ViewImage = styled.Image`
   height: 100%;
   border-radius: 100px;
 `;
+
 export const ContainerCardMainNameUser = styled.View`
   align-items: center;
-  bottom: 20%;
+  bottom: 10%;
 `;
 
 export const CardMainNameUser = styled.Text`
@@ -145,17 +145,31 @@ export const CardText = styled.Text`
   color: #fff;
 `;
 
+export const BackButton = styled.TouchableOpacity`
+  margin-left: 5%;
+  width: 15%;
+  height: 30px;
+`;
+
+export const ContainerHeader = styled.View`
+  width: 100%;
+  top: 12%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 // !Style para fazer shadow dos cards
 export const Styles = StyleSheet.create({
-    CardStyle: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 2,
-        elevation: 9,
-        zIndex: 1,
+  CardStyle: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
     },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    elevation: 9,
+    zIndex: 1,
+  },
 });

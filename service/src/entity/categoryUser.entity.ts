@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserEntity } from "./user.entity";
 import { CategoryEntity } from "./category.entity";
 
@@ -9,8 +9,10 @@ export class CategoryUserEntity {
     id: number;
 
     @ManyToOne(type => UserEntity, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "user_id" })
     user: UserEntity;
 
     @ManyToOne(type => CategoryEntity, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "category_id" })
     categorys: CategoryEntity;
 }

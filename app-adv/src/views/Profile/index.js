@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import {
     Container,
@@ -28,9 +28,12 @@ import {
     CardImage,
     CardText,
     Styles,
+    BackButton,
+    ContainerHeader
 } from "./styles";
-
-// const ImageUser = require("../../../assets/images/ImageUser.png");
+import { AntDesign } from "@expo/vector-icons";
+import { Octicons } from '@expo/vector-icons';
+const ImageUser = require("../../../assets/images/ImageUser.png");
 // const ImageProfile = require("../../../assets/images/ImageProfile.png");
 // const ImageReport = require("../../../assets/images/ImageReport.png");
 
@@ -40,6 +43,7 @@ export const Profile = () => {
 
     const fetchUser = async () => {
         const data = await AsyncStorage.getItem("user");
+        console.log(data)
         setUser(JSON.parse(data));
     };
 
@@ -48,22 +52,34 @@ export const Profile = () => {
     }, []);
 
     const handledReport = () => {
-        navigation.navigate("Report", { view: "MainTab" });
+        navigation.navigate("AddressRegister", { userId: user.id });
     };
 
     const handledSettings = () => {
         navigation.navigate("Settings");
     };
 
+    const handlerBack = () => {
+        navigation.reset({
+            routes: [{ name: "ViewMap" }],
+        });
+    };
+
     return (
         <Container>
-            <ContainerTitle>
-                <Title>Perfil</Title>
-            </ContainerTitle>
+            <ContainerHeader>
+                <BackButton onPress={handlerBack}>
+                    <AntDesign name="arrowleft" size={30} color="black" />
+                </BackButton>
+                <ContainerTitle>
+                    {/* <Title>Perfil</Title> */}
+                </ContainerTitle>
+            </ContainerHeader>
+
             <ContainerCardMain style={Styles.CardStyle}>
                 <ContentCardMain>
                     <ContainerImage>
-                        {/* <ViewImage source={user.url ? { uri: user.url } : ImageUser} /> */}
+                        <ViewImage source={user.url ? { uri: user.url } : ImageUser}/>
                         <ContainerSettings onPress={handledSettings}>
                             <Settings>
                                 <Ionicons name="settings-sharp" size={20} color="white" />
@@ -73,29 +89,34 @@ export const Profile = () => {
 
                     <ContentCard>
                         <ContainerCardMainNameUser>
-                            {/* <CardMainNameUser>{user.name}</CardMainNameUser> */}
+                            <CardMainNameUser>Dr. {user.name}</CardMainNameUser>
                         </ContainerCardMainNameUser>
-                        <ContainerScore>
-                            {/* <ViewImageProfile source={ImageProfile}></ViewImageProfile> */}
-                            <Separator />
-                            <Score>
-                                <ScoreTitle>Pontos Disponíveis</ScoreTitle>
-                                <Value>300 pts</Value>
-                            </Score>
-                        </ContainerScore>
+                        {/* <ContainerScore>
+                            <ViewImageProfile source={ImageProfile}></ViewImageProfile> */}
+                            {/* <Separator /> */}
+                            {/* <Score>
+                                 <ScoreTitle>Pontos Disponíveis</ScoreTitle>
+                                <Value>300 pts</Value> 
+                            </Score> 
+                        </ContainerScore>*/}
                     </ContentCard>
+                    
                 </ContentCardMain>
+
             </ContainerCardMain>
+
             <ContainerCard>
                 <Card style={Styles.CardStyle} onPress={handledReport}>
                     <CardContent>
-                        <CardContainerImage style={{ height: "300%" }}>
+                        <CardContainerImage >
                             {/* <CardImage source={ImageReport} /> */}
+                            <Octicons name="location" size={75} color="#ffff" />
                         </CardContainerImage>
-                        <CardText>Reportar</CardText>
+                        <CardText>Endereços</CardText>
                     </CardContent>
                 </Card>
             </ContainerCard>
+
         </Container>
     );
 }

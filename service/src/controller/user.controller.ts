@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { UserEntity } from "../entity/user.entity";
-// import { UserBalanceEntity } from "../entity/userBalance.entity";
+import { CategoryUserEntity } from "../entity/categoryUser.entity";
+import { CategoryEntity } from "../entity/category.entity";
 import GenToken from "../utils/generateToken";
 import Image from "../entity/imageUser.entity";
 import * as path from "path";
@@ -124,7 +125,29 @@ class UsuarioController {
                 return;
             }
 
-            res.send({ user });
+            // Não atualiza senha nesse metodo!
+            delete user["password"];
+            delete user["resetToken"];
+            delete user["dataReset"];
+
+            var image = await getRepository(Image)
+                .createQueryBuilder()
+                .where("user_id = :id", { id: user.id })
+                .getOne();
+
+            if (image) {
+                image.path = `http://${process.env.IP}/uploads/${image.path}`;
+            }
+
+            // carrega categoria do Usuario
+            const categoryUser = await getRepository(CategoryEntity)
+                .createQueryBuilder("user")
+                .innerJoin("user.categorys", "categorys")
+                .where("categorys.user_id = :id", { id: user.id })
+                .getMany();
+                
+            res.send({ user, image, categoryUser });
+
         } catch (error) {
             res.status(500).send(error);
         }

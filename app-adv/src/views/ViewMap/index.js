@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AntDesign, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 import * as Location from "expo-location";
@@ -28,6 +28,7 @@ import {
   SelectedArea,
   BtnFloating,
   BtnText,
+  CalloutTextDesc
 } from "./styles";
 
 import Dropdow from "../../components/dropdown";
@@ -35,12 +36,14 @@ import Dropdow from "../../components/dropdown";
 const CalloutPng = require("../../../assets/images/map-marker.png");
 const MyPng = require("../../../assets/images/my-location-pin-1.png");
 import api from "../../api/index";
-import { Alert } from "react-native";
+import { ActivityIndicator, Alert, Image, View } from "react-native";
+import Loading from "../../components/Loading";
 
 export const ViewMap = () => {
   const [myLocation, setMyLocation] = useState();
   const [position, setPosition] = useState();
   const [locationsUsersData, setLocationsUsersData] = useState();
+  const [loadingImage, setLoadingImage] = useState();
   const [categoryData, setCategoryData] = useState([]);
   const navigation = useNavigation();
 
@@ -54,10 +57,15 @@ export const ViewMap = () => {
     { label: "Direito Trabalhista", id: "4" },
     { label: "Direito Contratual", id: "5" },
   ]);
+
   const [category, setCategory] = useState();
   const [categoryID, setCategoryID] = useState();
   const [categorysSelected, setCategorysSelected] = useState([]);
 
+  const loadingImageFunc = () => {
+    setLoadingImage(!loadingImage);
+    console.log(loadingImage);
+  };
   const fetchLocations = async () => {
     await api
       .get("findUsersLocation")
@@ -85,7 +93,13 @@ export const ViewMap = () => {
   };
 
   const handlerLogin = () => {
-    navigation.navigate("Login");
+    // Passando fixo o usuario
+    navigation.navigate("Login", { userId: 1 });
+  };
+
+  const handlerProfileMap = (id) => {
+    // Passando fixo o usuario
+    navigation.navigate("ProfileMap", { userId: id });
   };
 
   useEffect(() => {
@@ -104,7 +118,7 @@ export const ViewMap = () => {
         setMyLocation(data);
       }
     })();
-  }, []);
+  }, []); //[locationsUsersData]);
 
   const selectedCategory = (category) => {
     setCategoryID(category);
@@ -161,6 +175,7 @@ export const ViewMap = () => {
           <SearchInput placeholder="pesquisar..." />
         </SearchArea>
         <Dropdow
+          color={"#FFF"}
           style={{
             width: "90%",
             borderWidth: 1.4,
@@ -189,7 +204,6 @@ export const ViewMap = () => {
         >
           <Marker
             calloutAnchor={{ x: 0.3, y: 3 }}
-            title="Seu Local"
             icon={MyPng}
             coordinate={{
               latitude: myLocation.latitude,
@@ -218,25 +232,30 @@ export const ViewMap = () => {
                       />
                     </ContainerMarkerIcon>
                   </MarkerContainer>
-                  <Callout tooltip>
+                  <Callout tooltip onPress={()=>{handlerProfileMap(locationsUsers.id)}}>
                     <CalloutContainer>
                       <CalloutImageContainer>
-                        <CalloutImage source={CalloutPng} resizeMode="cover" />
+                        {/* <Image
+                          style={{
+                            width: 50,
+                            height: 50,
+                            position: "absolute",
+                          }}
+                          source={{
+                            uri: `http://192.168.5.110:8080/uploads/${locationsUsers.images[0].path}`,
+                          }}
+                          onLoad={() => console.log("onLoad")}
+                          onLoadStart={() => console.log("onLoadStart")}
+                          onLoadEnd={() => console.log("onLoadEnd")}
+                          resizeMode="cover"
+                        /> */}
+                        {/* <FontAwesome5 name="store-alt" size={45} color="black" /> */}
+                        <MaterialCommunityIcons name="office-building" size={50} color="black" />
                       </CalloutImageContainer>
                       <CalloutContainerText>
                         <CalloutText>{location.description}</CalloutText>
-                        <CalloutContainerTextKM>
-                          <FontAwesome5
-                            name="map-marker-alt"
-                            size={24}
-                            color="#03A678"
-                          />
-                          <CalloutTextKM>2 km</CalloutTextKM>
-                        </CalloutContainerTextKM>
+                        <CalloutTextDesc>Dr {locationsUsers.fullName}</CalloutTextDesc>
                       </CalloutContainerText>
-                      <CalloutIcon>
-                        <FontAwesome name="qrcode" size={60} color="#03A678" />
-                      </CalloutIcon>
                     </CalloutContainer>
                   </Callout>
                 </Marker>
@@ -245,7 +264,17 @@ export const ViewMap = () => {
           })}
         </MapView>
       ) : (
-        <CalloutText>Carregando..</CalloutText>
+        <Loading
+          width={200}
+          height={200}
+          style={{
+            flex: 1,
+            width: "100%",
+            backgroundColor: "#F2F2F2",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        ></Loading>
       )}
       {categorysSelected.length > 0 && (
         <Options>

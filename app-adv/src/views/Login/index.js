@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Keyboard, ActivityIndicator, Alert } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     Container,
     ContainerImage,
@@ -93,8 +94,8 @@ export const Login = () => {
                             name: res.user.fullName,
                             url: res.image.path,
                         };
-                        // await AsyncStorage.setItem("token", res.token);
-                        // await AsyncStorage.setItem("user", JSON.stringify(data));
+                        await AsyncStorage.setItem("token", res.token);
+                        await AsyncStorage.setItem("user", JSON.stringify(data));
                         // navigation.navigate("MainTab", { screen: "Profile" });
                         navigation.navigate("Profile");
                     }
@@ -137,7 +138,7 @@ export const Login = () => {
         <Container>
             <Scroller>
                 <ContainerImage>
-                    {/* <ViewImage source={ImageLogin} /> */}
+                    <ViewImage source={ImageLogin} />
                 </ContainerImage>
                 {!close && (
                     <Animatable.View

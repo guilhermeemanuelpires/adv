@@ -63,7 +63,7 @@ class LocationUserController {
                 .then((resp) => {
                     const { features } = resp.data;
                     const { coordinates } = features[0].geometry
-                    Object.assign(endereco, { latitude: coordinates[0], longitude: coordinates[1] });
+                    Object.assign(endereco, { longitude: coordinates[0], latitude: coordinates[1] });
                 })
                 .catch((err) => {
                     console.log(err);
